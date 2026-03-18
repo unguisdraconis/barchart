@@ -23,81 +23,98 @@ export default function Barplot({ data, width = 500, height = 400 }) {
   );
 
   return (
-    <svg
-      width={width}
-      height={height}
-      role="img"
-      aria-label="Student count by country"
-    >
-      <text
-        x={width / 2}
-        y={24}
-        textAnchor="middle"
-        fontSize={18}
-        fontWeight={700}
+    <>
+      <svg
+        width={width}
+        height={height}
+        role="img"
+        aria-label="Student count by country"
       >
-        Students per Country
-      </text>
+        <text
+          x={width / 2}
+          y={24}
+          textAnchor="middle"
+          fontSize={18}
+          fontWeight={700}
+          fill="var(--text-color)"
+        >
+          Students per Country
+        </text>
 
-      <g transform={`translate(${margin.left},${margin.top})`}>
-        {data.map((d) => {
-          const y = yScale(d.country) ?? 0;
-          const barWidth = xScale(d.students);
-          const isOtherHovered = hoveredCountry && hoveredCountry !== d.country;
-          const opacity = isOtherHovered ? 0.3 : 1;
+        <g transform={`translate(${margin.left},${margin.top})`}>
+          {data.map((d) => {
+            const y = yScale(d.country) ?? 0;
+            const barWidth = xScale(d.students);
+            const isOtherHovered =
+              hoveredCountry && hoveredCountry !== d.country;
+            const opacity = isOtherHovered ? 0.3 : 1;
 
-          return (
-            <g
-              key={d.country}
-              onMouseEnter={() => setHoveredCountry(d.country)}
-              onMouseLeave={() => setHoveredCountry(null)}
-            >
-              <rect
-                x={0}
-                y={y}
-                width={barWidth}
-                height={yScale.bandwidth()}
-                fill="#4f46e5"
-                opacity={opacity}
-                rx={4}
-                style={{ transition: "opacity 300ms ease" }}
-              />
-              <text
-                x={-10}
-                y={y + yScale.bandwidth() / 2}
-                textAnchor="end"
-                dominantBaseline="middle"
-                fontSize={12}
-                fill="#1f2937"
-                opacity={opacity}
-                style={{ transition: "opacity 400ms ease" }}
+            return (
+              <g
+                key={d.country}
+                onMouseEnter={() => setHoveredCountry(d.country)}
+                onMouseLeave={() => setHoveredCountry(null)}
               >
-                {d.country}
-              </text>
-              <text
-                x={barWidth + 8}
-                y={y + yScale.bandwidth() / 2}
-                dominantBaseline="middle"
-                fontSize={12}
-                fill="#1f2937"
-                opacity={opacity}
-                style={{ transition: "opacity 300ms ease" }}
-              >
-                {d.students}
-              </text>
-            </g>
-          );
-        })}
+                <rect
+                  x={0}
+                  y={y}
+                  width={barWidth}
+                  height={yScale.bandwidth()}
+                  fill="var(--bar-fill)"
+                  opacity={opacity}
+                  rx={4}
+                  style={{ transition: "opacity 300ms ease" }}
+                />
+                <text
+                  x={-10}
+                  y={y + yScale.bandwidth() / 2}
+                  textAnchor="end"
+                  dominantBaseline="middle"
+                  fontSize={12}
+                  fill="var(--text-color)"
+                  opacity={opacity}
+                  style={{ transition: "opacity 400ms ease" }}
+                >
+                  {d.country}
+                </text>
+                <text
+                  x={barWidth + 8}
+                  y={y + yScale.bandwidth() / 2}
+                  dominantBaseline="middle"
+                  fontSize={12}
+                  fill="var(--text-color)"
+                  opacity={opacity}
+                  style={{ transition: "opacity 300ms ease" }}
+                >
+                  {d.students}
+                </text>
+              </g>
+            );
+          })}
 
-        {/* X axis line */}
-        <line
-          x1={0}
-          y1={innerHeight}
-          x2={innerWidth}
-          y2={innerHeight}
-          stroke="#94a3b8"
-        />
-      </g>
-    </svg>
+          {/* X axis line */}
+          <line
+            x1={0}
+            y1={innerHeight}
+            x2={innerWidth}
+            y2={innerHeight}
+            stroke="var(--axis-stroke)"
+          />
+        </g>
+      </svg>
+
+      <div
+        style={{
+          marginTop: 12,
+          fontSize: 8,
+          color: "var(--text-muted)",
+          textAlign: "center",
+          marginLeft: 180,
+        }}
+      >
+        By Jeremiah King using GitHub Copilot · Model: Raptor mini (Preview) ·
+        2026
+      </div>
+    </>
   );
 }

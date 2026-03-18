@@ -27,6 +27,7 @@ const data = [
 export default function App() {
   return (
     <div className="App">
+      <h1>D3 + React + SVG Barchart</h1>
       <Barplot data={data} />
     </div>
   );
