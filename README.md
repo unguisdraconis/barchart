@@ -6,6 +6,8 @@ An early D3 Loves React learning exercise building a horizontal SVG bar chart wi
 
 [View the chart on GitHub Pages](https://unguisdraconis.github.io/barchart/).
 
+![An early D3 Loves React learning exercise building a horizontal SVG bar chart with D3 scales and React rendering.](docs/images/barchart.png)
+
 ## Assignment Context
 
 The course exercise asked learners to visualize supplied first-cohort country counts as a horizontal bar chart. D3 performs the scale and layout calculations, while React and JSX render the SVG rectangles and text. The assignment explicitly discouraged older D3 DOM-manipulation patterns such as `d3.select` and `d3.append` and encouraged using AI as a development aid.
