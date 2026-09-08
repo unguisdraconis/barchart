@@ -29,6 +29,7 @@ export default function Barplot({ data, width = 500, height = 400 }) {
         height={height}
         role="img"
         aria-label="Student count by country"
+        aria-describedby="barplot-description"
       >
         <text
           x={width / 2}
@@ -56,6 +57,7 @@ export default function Barplot({ data, width = 500, height = 400 }) {
                 onMouseLeave={() => setHoveredCountry(null)}
               >
                 <rect
+                  className="barplot-mark"
                   x={0}
                   y={y}
                   width={barWidth}
@@ -66,6 +68,7 @@ export default function Barplot({ data, width = 500, height = 400 }) {
                   style={{ transition: "opacity 300ms ease" }}
                 />
                 <text
+                  className="barplot-mark"
                   x={-10}
                   y={y + yScale.bandwidth() / 2}
                   textAnchor="end"
@@ -78,6 +81,7 @@ export default function Barplot({ data, width = 500, height = 400 }) {
                   {d.country}
                 </text>
                 <text
+                  className="barplot-mark"
                   x={barWidth + 8}
                   y={y + yScale.bandwidth() / 2}
                   dominantBaseline="middle"
@@ -115,6 +119,34 @@ export default function Barplot({ data, width = 500, height = 400 }) {
         By Jeremiah King using GitHub Copilot · Model: Raptor mini (Preview) ·
         2026
       </div>
+
+      <section
+        className="visually-hidden"
+        aria-labelledby="barplot-data-heading"
+      >
+        <h2 id="barplot-data-heading">Student counts by country</h2>
+        <p id="barplot-description">
+          Horizontal bar chart of student counts for 20 countries. Exact values
+          are provided in the following table.
+        </p>
+        <table>
+          <caption>Values shown in the bar chart</caption>
+          <thead>
+            <tr>
+              <th scope="col">Country</th>
+              <th scope="col">Students</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((d) => (
+              <tr key={d.country}>
+                <th scope="row">{d.country}</th>
+                <td>{d.students}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     </>
   );
 }
